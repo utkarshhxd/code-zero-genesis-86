@@ -2,7 +2,7 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
-import { Code, Settings, User } from 'lucide-react';
+import { Code } from 'lucide-react';
 
 const Navbar = () => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -12,7 +12,7 @@ const Navbar = () => {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16">
           <div className="flex items-center">
-            <Link to="/" className="flex items-center">
+            <Link to="/" className="flex items-center group transition-transform hover:scale-105 duration-300">
               <div className="bg-gradient-to-r from-zerox-blue to-zerox-purple p-[1px] rounded-md">
                 <div className="bg-zerox-darker h-8 w-8 flex items-center justify-center rounded-md">
                   <Code className="h-5 w-5 text-white" />
@@ -24,19 +24,33 @@ const Navbar = () => {
           
           <div className="hidden md:block">
             <div className="ml-10 flex items-center space-x-4">
-              <Link to="/" className="text-gray-300 hover:text-white px-3 py-2 rounded-md text-sm font-medium">
+              <Link 
+                to="/" 
+                className="nav-link text-gray-300 hover:text-white px-3 py-2 rounded-md text-sm font-medium transform hover:-translate-y-0.5 transition-all duration-300 hover:shadow-[0_0_15px_rgba(0,180,216,0.3)] relative before:absolute before:inset-0 before:bg-zerox-blue/10 before:rounded-md before:scale-x-0 before:origin-right hover:before:scale-x-100 before:transition-transform before:-z-10"
+              >
                 Home
               </Link>
-              <Link to="/problems" className="text-gray-300 hover:text-white px-3 py-2 rounded-md text-sm font-medium">
+              <Link 
+                to="/problems" 
+                className="nav-link text-gray-300 hover:text-white px-3 py-2 rounded-md text-sm font-medium transform hover:-translate-y-0.5 transition-all duration-300 hover:shadow-[0_0_15px_rgba(114,9,183,0.3)] relative before:absolute before:inset-0 before:bg-zerox-purple/10 before:rounded-md before:scale-x-0 before:origin-right hover:before:scale-x-100 before:transition-transform before:-z-10"
+              >
                 Problems
               </Link>
-              <Link to="/learn" className="text-gray-300 hover:text-white px-3 py-2 rounded-md text-sm font-medium">
+              <Link 
+                to="/learn" 
+                className="nav-link text-gray-300 hover:text-white px-3 py-2 rounded-md text-sm font-medium transform hover:-translate-y-0.5 transition-all duration-300 hover:shadow-[0_0_15px_rgba(0,180,216,0.3)] relative before:absolute before:inset-0 before:bg-zerox-blue/10 before:rounded-md before:scale-x-0 before:origin-right hover:before:scale-x-100 before:transition-transform before:-z-10"
+              >
                 Learn
               </Link>
-              <Button variant="outline" className="ml-4">
+              <Button 
+                variant="outline" 
+                className="ml-4 transform hover:scale-105 hover:-translate-y-0.5 transition-all duration-300 hover:shadow-[0_0_15px_rgba(255,255,255,0.2)]"
+              >
                 Sign In
               </Button>
-              <Button className="bg-gradient-to-r from-zerox-blue to-zerox-purple hover:opacity-90 transition-opacity">
+              <Button 
+                className="bg-gradient-to-r from-zerox-blue to-zerox-purple hover:opacity-90 transition-all duration-300 transform hover:scale-105 hover:-translate-y-0.5 hover:shadow-[0_0_20px_rgba(114,9,183,0.4)]"
+              >
                 Sign Up
               </Button>
             </div>

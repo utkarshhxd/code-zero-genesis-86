@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import Navbar from '@/components/Navbar';
 import Hero from '@/components/Hero';
 import { ArrowRight, Cpu, Database, BookOpen, Code } from 'lucide-react';
+import { useEffect, useRef } from 'react';
 
 const Index = () => {
   const features = [
@@ -22,6 +23,46 @@ const Index = () => {
       description: "Access detailed explanations, visualizations, and step-by-step solutions to understand complex algorithms."
     }
   ];
+
+  const cardsContainer = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const container = cardsContainer.current;
+    if (!container) return;
+
+    const handleMouseMove = (e: MouseEvent) => {
+      const cards = container.getElementsByClassName('glass-card');
+      const containerRect = container.getBoundingClientRect();
+
+      Array.from(cards).forEach((card) => {
+        const cardEl = card as HTMLElement;
+        const cardRect = cardEl.getBoundingClientRect();
+        const cardCenterX = cardRect.left + cardRect.width / 2;
+        const cardCenterY = cardRect.top + cardRect.height / 2;
+
+        const angleX = (e.clientY - cardCenterY) / 30;
+        const angleY = -(e.clientX - cardCenterX) / 30;
+
+        cardEl.style.transform = `perspective(1000px) rotateX(${angleX}deg) rotateY(${angleY}deg) translateZ(10px)`;
+      });
+    };
+
+    const handleMouseLeave = () => {
+      const cards = container.getElementsByClassName('glass-card');
+      Array.from(cards).forEach((card) => {
+        const cardEl = card as HTMLElement;
+        cardEl.style.transform = 'perspective(1000px) rotateX(0) rotateY(0) translateZ(0)';
+      });
+    };
+
+    container.addEventListener('mousemove', handleMouseMove);
+    container.addEventListener('mouseleave', handleMouseLeave);
+
+    return () => {
+      container.removeEventListener('mousemove', handleMouseMove);
+      container.removeEventListener('mouseleave', handleMouseLeave);
+    };
+  }, []);
   
   return (
     <div className="min-h-screen bg-zerox-dark">
@@ -31,22 +72,25 @@ const Index = () => {
         <Hero />
         
         {/* Features Section */}
-        <section className="py-20 px-4 sm:px-6 lg:px-8 relative">
+        <section className="py-20 px-4 sm:px-6 lg:px-8 relative overflow-hidden">
           <div className="absolute inset-0 bg-gradient-to-b from-zerox-dark via-zerox-dark to-zerox-darker"></div>
           
           <div className="max-w-7xl mx-auto relative">
             <div className="text-center mb-16">
-              <h2 className="text-3xl sm:text-4xl font-bold gradient-text mb-4">Supercharge Your Coding Skills</h2>
+              <h2 className="text-3xl sm:text-4xl font-bold gradient-text mb-4 transform transition-transform hover:scale-105 duration-300">
+                Supercharge Your Coding Skills
+              </h2>
               <p className="text-xl text-gray-400 max-w-3xl mx-auto">
                 Zero X combines advanced AI and real-time code execution to help you master data structures and algorithms.
               </p>
             </div>
             
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <div ref={cardsContainer} className="grid grid-cols-1 md:grid-cols-3 gap-8">
               {features.map((feature, index) => (
                 <div 
                   key={index}
-                  className="glass-card rounded-xl p-6 transition-transform duration-300 hover:-translate-y-2"
+                  className="glass-card rounded-xl p-6 transition-all duration-300 hover:shadow-[0_0_30px_rgba(0,180,216,0.2)]"
+                  style={{ transition: 'transform 0.3s ease' }}
                 >
                   <div className="h-14 w-14 rounded-full bg-zerox-dark/50 flex items-center justify-center mb-6">
                     {feature.icon}
