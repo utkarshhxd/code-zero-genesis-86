@@ -1,9 +1,8 @@
-
 import { Button } from '@/components/ui/button';
 import { Link } from 'react-router-dom';
 import Navbar from '@/components/Navbar';
 import Hero from '@/components/Hero';
-import { ArrowRight, Cpu, Database, BookOpen } from 'lucide-react';
+import { ArrowRight, Cpu, Database, BookOpen, Code } from 'lucide-react';
 
 const Index = () => {
   const features = [
