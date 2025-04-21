@@ -1,4 +1,3 @@
-
 import type { Config } from "tailwindcss";
 
 export default {
@@ -19,6 +18,9 @@ export default {
       },
     },
     extend: {
+      fontFamily: {
+        josefin: ["Josefin Sans", "sans-serif"],
+      },
       colors: {
         border: "hsl(var(--border))",
         input: "hsl(var(--input))",
@@ -78,19 +80,19 @@ export default {
           to: { height: "0" },
         },
         pulse: {
-          '0%, 100%': { opacity: '1' },
-          '50%': { opacity: '0.5' },
+          "0%, 100%": { opacity: "1" },
+          "50%": { opacity: "0.5" },
         },
         gradient: {
-          '0%': { backgroundPosition: '0% 50%' },
-          '100%': { backgroundPosition: '100% 50%' },
+          "0%": { backgroundPosition: "0% 50%" },
+          "100%": { backgroundPosition: "100% 50%" },
         },
       },
       animation: {
         "accordion-down": "accordion-down 0.2s ease-out",
         "accordion-up": "accordion-up 0.2s ease-out",
-        pulse: 'pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite',
-        gradient: 'gradient 3s ease infinite alternate',
+        pulse: "pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite",
+        gradient: "gradient 3s ease infinite alternate",
       },
     },
   },

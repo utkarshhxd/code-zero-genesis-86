@@ -4,22 +4,36 @@ import { ArrowRight } from 'lucide-react';
 import { Link } from 'react-router-dom';
 
 const Hero = () => {
+  const gradientStyle = {
+    backgroundImage: `linear-gradient(123deg, rgba(99, 126, 146, 0.77), rgba(0, 0, 0, 1))`,
+    WebkitBackgroundClip: "text",
+    WebkitTextFillColor: "transparent",
+    // Removed MozTextFillColor because it causes build errors.
+  };
+
   return (
-    <div className="relative overflow-hidden pt-16">
+    <div className="relative overflow-hidden pt-16 font-josefin">
       {/* Background decorations */}
       <div className="absolute top-0 left-1/4 w-1/2 h-1/2 bg-zerox-blue/10 rounded-full filter blur-3xl opacity-20"></div>
       <div className="absolute bottom-0 right-1/4 w-1/2 h-1/2 bg-zerox-purple/10 rounded-full filter blur-3xl opacity-20"></div>
       
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-20 pb-16 text-center">
         <h1 className="text-4xl sm:text-5xl md:text-6xl font-extrabold text-white">
-          Master <span className="gradient-text">Data Structures</span> and <span className="gradient-text">Algorithms</span>
+          Master{" "}
+          <span style={gradientStyle}>
+            Data Structures
+          </span>{" "}
+          and{" "}
+          <span style={gradientStyle}>
+            Algorithms
+          </span>
         </h1>
         <p className="mt-6 max-w-2xl mx-auto text-xl text-gray-300">
           Zero X helps you prepare for technical interviews with AI-generated coding challenges, solutions, and real-time feedback.
         </p>
         
         <div className="mt-10 flex flex-col sm:flex-row gap-4 justify-center">
-          <Button asChild className="bg-gradient-to-r from-zerox-blue to-zerox-purple text-white px-8 py-6 text-lg">
+          <Button asChild className="bg-gradient-to-r from-[rgba(99,126,146,0.77)] to-black text-white px-8 py-6 text-lg">
             <Link to="/problems">
               Start Coding <ArrowRight className="ml-2 h-5 w-5" />
             </Link>
@@ -71,3 +85,4 @@ function twoSum(nums, target) {
 };
 
 export default Hero;
+
