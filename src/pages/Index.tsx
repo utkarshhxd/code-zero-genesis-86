@@ -112,7 +112,9 @@ const Index = () => {
         
         {/* Call to Action */}
         <section className="py-16 px-4 sm:px-6 lg:px-8 bg-zerox-darker relative overflow-hidden">
-          <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-zerox-blue to-zerox-purple"></div>
+          <div className="absolute top-0 left-0 w-full h-1" style={{
+            background: "linear-gradient(123deg, rgba(212, 223, 232, 0.77), rgba(58, 116, 152, 1), rgba(0, 43, 77, 1))"
+          }}></div>
           <div className="absolute -top-40 -right-40 w-80 h-80 bg-zerox-blue/10 rounded-full filter blur-3xl"></div>
           <div className="absolute -bottom-40 -left-40 w-80 h-80 bg-zerox-purple/10 rounded-full filter blur-3xl"></div>
           
@@ -123,7 +125,13 @@ const Index = () => {
             </p>
             
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Button asChild className="bg-gradient-to-r from-zerox-blue to-zerox-purple text-white px-8 py-6 text-lg">
+              <Button 
+                asChild 
+                className="text-white px-8 py-6 text-lg border-0"
+                style={{
+                  background: "linear-gradient(123deg, rgba(212, 223, 232, 0.77), rgba(58, 116, 152, 1), rgba(0, 43, 77, 1))"
+                }}
+              >
                 <Link to="/problems">
                   Start Coding <ArrowRight className="ml-2 h-5 w-5" />
                 </Link>
@@ -139,7 +147,9 @@ const Index = () => {
           <div className="flex flex-col md:flex-row justify-between items-center">
             <div className="flex items-center mb-6 md:mb-0">
               <Link to="/" className="flex items-center">
-                <div className="bg-gradient-to-r from-zerox-blue to-zerox-purple p-[1px] rounded-md">
+                <div className="p-[1px] rounded-md" style={{
+                  background: "linear-gradient(123deg, rgba(212, 223, 232, 0.77), rgba(58, 116, 152, 1), rgba(0, 43, 77, 1))"
+                }}>
                   <div className="bg-zerox-darker h-8 w-8 flex items-center justify-center rounded-md">
                     <Code className="h-5 w-5 text-white" />
                   </div>

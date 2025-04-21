@@ -1,3 +1,4 @@
+
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
@@ -16,7 +17,7 @@ const Navbar = () => {
         <div className="flex items-center justify-between h-16">
           <div className="flex items-center">
             <Link to="/" className="flex items-center group transition-all duration-300 hover:scale-105">
-              <div className="bg-zerox-blue rounded-full h-8 w-8 flex items-center justify-center relative overflow-hidden">
+              <div className="rounded-full h-8 w-8 flex items-center justify-center relative overflow-hidden" style={gradientStyle}>
                 <Zap className="h-5 w-5 text-white transform -rotate-12" />
                 <div className="absolute inset-0 bg-gradient-to-tr from-zerox-blue/0 via-white/20 to-transparent rotate-45 translate-x-full group-hover:translate-x-0 transition-transform duration-300" />
               </div>
