@@ -12,17 +12,36 @@ const Hero = () => {
       
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-20 pb-16 text-center">
         <h1 className="sm:text-5xl md:text-6xl font-extrabold font-josefin text-white text-4xl">
-          <span className="align-middle uppercase" style={{fontFamily: 'inherit', fontSize: '0.8em'}}>Master</span>
-          <span className="mx-2 text-transparent custom-gradient-text text-[1.15em] font-josefin font-extrabold align-middle"> Data Structures </span>
-          <span className="align-middle uppercase" style={{fontFamily: 'inherit', fontSize: '0.8em'}}>And</span>
-          <span className="mx-2 text-transparent custom-gradient-text text-[1.15em] font-josefin font-extrabold align-middle"> Algorithms </span>
+          <span className="align-middle font-sans capitalize" style={{
+            fontSize: '0.8em',
+            textTransform: 'capitalize',
+            display: 'inline-block'
+          }}>Master</span>
+          <span className="mx-2 text-transparent custom-gradient-text text-[1.15em] font-josefin font-extrabold align-middle">
+            {" Data Structures "}
+          </span>
+          <span className="align-middle font-sans capitalize" style={{
+            fontSize: '0.8em',
+            textTransform: 'capitalize',
+            display: 'inline-block'
+          }}>And</span>
+          <span className="mx-2 text-transparent custom-gradient-text text-[1.15em] font-josefin font-extrabold align-middle">
+            {" Algorithms "}
+          </span>
         </h1>
         <p className="mt-6 max-w-2xl mx-auto text-xl text-gray-300">
           Zero X helps you prepare for technical interviews with AI-generated coding challenges, solutions, and real-time feedback.
         </p>
         
         <div className="mt-10 flex flex-col sm:flex-row gap-4 justify-center">
-          <Button asChild className="bg-gradient-to-r from-zerox-blue to-zerox-purple text-white px-8 py-6 text-lg">
+          <Button 
+            asChild 
+            className="text-white px-8 py-6 text-lg border-0" 
+            style={{
+              background: "linear-gradient(123deg, rgba(212, 223, 232, 0.77), rgba(58, 116, 152, 1), rgba(0, 43, 77, 1))",
+              WebkitBackgroundClip: "border-box"
+            }}
+          >
             <Link to="/problems">
               Start Coding <ArrowRight className="ml-2 h-5 w-5" />
             </Link>
@@ -74,3 +93,4 @@ function twoSum(nums, target) {
 };
 
 export default Hero;
+

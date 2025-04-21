@@ -3,6 +3,10 @@ import { Link } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
 import { Zap } from 'lucide-react';
 
+const gradientStyle = {
+  background: "linear-gradient(123deg, rgba(212, 223, 232, 0.77), rgba(58, 116, 152, 1), rgba(0, 43, 77, 1))"
+};
+
 const Navbar = () => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
@@ -47,7 +51,8 @@ const Navbar = () => {
                 Sign In
               </Button>
               <Button 
-                className="bg-gradient-to-r from-zerox-blue to-zerox-purple hover:opacity-90 transition-all duration-300 transform hover:scale-105 hover:-translate-y-0.5 hover:shadow-[0_0_20px_rgba(114,9,183,0.4)]"
+                className="text-white transition-all duration-300 transform hover:scale-105 hover:-translate-y-0.5 hover:shadow-[0_0_20px_rgba(114,9,183,0.4)] border-0"
+                style={gradientStyle}
               >
                 Sign Up
               </Button>
@@ -91,7 +96,10 @@ const Navbar = () => {
               <Button variant="outline" className="w-full">
                 Sign In
               </Button>
-              <Button className="w-full bg-gradient-to-r from-zerox-blue to-zerox-purple hover:opacity-90 transition-opacity">
+              <Button 
+                className="w-full text-white border-0"
+                style={gradientStyle}
+              >
                 Sign Up
               </Button>
             </div>
