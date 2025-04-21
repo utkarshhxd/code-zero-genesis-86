@@ -1,3 +1,4 @@
+
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
@@ -47,7 +48,8 @@ const Navbar = () => {
                 Sign In
               </Button>
               <Button 
-                className="bg-gradient-to-r from-zerox-blue to-zerox-purple hover:opacity-90 transition-all duration-300 transform hover:scale-105 hover:-translate-y-0.5 hover:shadow-[0_0_20px_rgba(114,9,183,0.4)]"
+                className="ml-2 px-6 py-2 rounded-md text-lg"
+                style={{ backgroundImage: 'linear-gradient(90deg, #141e30, #243b55)', color: 'white' }}
               >
                 Sign Up
               </Button>
@@ -91,7 +93,10 @@ const Navbar = () => {
               <Button variant="outline" className="w-full">
                 Sign In
               </Button>
-              <Button className="w-full bg-gradient-to-r from-zerox-blue to-zerox-purple hover:opacity-90 transition-opacity">
+              <Button
+                className="w-full text-white"
+                style={{ backgroundImage: 'linear-gradient(90deg, #141e30, #243b55)' }}
+              >
                 Sign Up
               </Button>
             </div>
