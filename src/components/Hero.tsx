@@ -11,8 +11,11 @@ const Hero = () => {
       <div className="absolute bottom-0 right-1/4 w-1/2 h-1/2 bg-zerox-purple/10 rounded-full filter blur-3xl opacity-20"></div>
       
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-20 pb-16 text-center">
-        <h1 className="text-4xl sm:text-5xl md:text-6xl font-extrabold text-white">
-          Master <span className="gradient-text">Data Structures</span> and <span className="gradient-text">Algorithms</span>
+        <h1 className="text-4xl sm:text-5xl md:text-6xl font-extrabold font-josefin text-white">
+          Master{" "}
+          <span className="custom-gradient-text">Data Structures</span>{" "}
+          and{" "}
+          <span className="custom-gradient-text">Algorithms</span>
         </h1>
         <p className="mt-6 max-w-2xl mx-auto text-xl text-gray-300">
           Zero X helps you prepare for technical interviews with AI-generated coding challenges, solutions, and real-time feedback.
