@@ -81,10 +81,9 @@ const Index = () => {
               <h2 className="text-3xl sm:text-4xl font-bold mb-4 transform transition-transform hover:scale-105 duration-300" style={{ 
                 background: "linear-gradient(123deg, rgba(212, 223, 232, 0.77), rgba(58, 116, 152, 1), rgba(0, 43, 77, 1))",
                 WebkitBackgroundClip: "text",
-                MozBackgroundClip: "text",
                 backgroundClip: "text",
                 WebkitTextFillColor: "transparent",
-                MozTextFillColor: "transparent",
+                color: "transparent"
               }}>
                 Supercharge Your Coding Skills
               </h2>

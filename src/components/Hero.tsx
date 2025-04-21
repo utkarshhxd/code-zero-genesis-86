@@ -12,9 +12,9 @@ const Hero = () => {
       
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-20 pb-16 text-center">
         <h1 className="sm:text-5xl md:text-6xl font-extrabold font-josefin text-white text-4xl">
-          <span className="align-middle" style={{fontFamily: 'inherit', fontSize: '0.8em', textTransform: 'capitalize'}}>Master</span>
+          <span className="align-middle uppercase" style={{fontFamily: 'inherit', fontSize: '0.8em'}}>Master</span>
           <span className="mx-2 text-transparent custom-gradient-text text-[1.15em] font-josefin font-extrabold align-middle"> Data Structures </span>
-          <span className="align-middle" style={{fontFamily: 'inherit', fontSize: '0.8em', textTransform: 'capitalize'}}>And</span>
+          <span className="align-middle uppercase" style={{fontFamily: 'inherit', fontSize: '0.8em'}}>And</span>
           <span className="mx-2 text-transparent custom-gradient-text text-[1.15em] font-josefin font-extrabold align-middle"> Algorithms </span>
         </h1>
         <p className="mt-6 max-w-2xl mx-auto text-xl text-gray-300">
@@ -74,4 +74,3 @@ function twoSum(nums, target) {
 };
 
 export default Hero;
-
