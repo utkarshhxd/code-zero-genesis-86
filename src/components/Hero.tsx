@@ -12,21 +12,34 @@ const Hero = () => {
       
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-20 pb-16 text-center">
         <h1 className="sm:text-5xl md:text-6xl font-extrabold font-josefin text-white text-4xl">
-          <span className="align-middle font-sans capitalize" style={{
-            fontSize: '0.8em',
-            textTransform: 'capitalize',
-            display: 'inline-block'
-          }}>Master</span>
-          <span className="mx-2 text-transparent custom-gradient-text text-[1.15em] font-josefin font-extrabold align-middle">
-            {" Data Structures "}
+          <span
+            className="align-middle font-josefin"
+            style={{
+              fontWeight: 700,
+              fontSize: '1.8rem', // slightly larger
+              verticalAlign: 'middle',
+              marginRight: '0.4em'
+            }}
+          >
+            Master
           </span>
-          <span className="align-middle font-sans capitalize" style={{
-            fontSize: '0.8em',
-            textTransform: 'capitalize',
-            display: 'inline-block'
-          }}>And</span>
-          <span className="mx-2 text-transparent custom-gradient-text text-[1.15em] font-josefin font-extrabold align-middle">
-            {" Algorithms "}
+          <span className="mx-2 text-transparent custom-gradient-text text-[2.2rem] font-josefin font-extrabold align-middle">
+            {"Data Structures"}
+          </span>
+          <span
+            className="align-middle font-josefin"
+            style={{
+              fontWeight: 700,
+              fontSize: '1.8rem',
+              verticalAlign: 'middle',
+              marginLeft: '0.5em',
+              marginRight: '0.2em'
+            }}
+          >
+            And
+          </span>
+          <span className="text-transparent custom-gradient-text text-[2.2rem] font-josefin font-extrabold align-middle">
+            {"Algorithms"}
           </span>
         </h1>
         <p className="mt-6 max-w-2xl mx-auto text-xl text-gray-300">
@@ -39,7 +52,8 @@ const Hero = () => {
             className="text-white px-8 py-6 text-lg border-0" 
             style={{
               background: "linear-gradient(123deg, rgba(212, 223, 232, 0.77), rgba(58, 116, 152, 1), rgba(0, 43, 77, 1))",
-              WebkitBackgroundClip: "border-box"
+              WebkitBackgroundClip: "border-box",
+              MozBackgroundClip: "border-box"
             }}
           >
             <Link to="/problems">
