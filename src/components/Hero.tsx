@@ -12,50 +12,14 @@ const Hero = () => {
       
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-20 pb-16 text-center">
         <h1 className="text-4xl sm:text-5xl md:text-6xl font-extrabold text-white">
-          Master{' '}
-          <span
-            style={{
-              background: 'linear-gradient(123deg, rgba(99, 126, 146, 0.77), rgba(0, 0, 0, 1))',
-              WebkitBackgroundClip: 'text',
-              WebkitTextFillColor: 'transparent',
-              backgroundClip: 'text',
-              color: 'transparent',
-              MozBackgroundClip: 'text',
-              MozTextFillColor: 'transparent',
-              display: 'inline-block',
-            }}
-          >
-            Data Structures
-          </span>{' '}
-          and{' '}
-          <span
-            style={{
-              background: 'linear-gradient(123deg, rgba(99, 126, 146, 0.77), rgba(0, 0, 0, 1))',
-              WebkitBackgroundClip: 'text',
-              WebkitTextFillColor: 'transparent',
-              backgroundClip: 'text',
-              color: 'transparent',
-              MozBackgroundClip: 'text',
-              MozTextFillColor: 'transparent',
-              display: 'inline-block',
-            }}
-          >
-            Algorithms
-          </span>
+          Master <span className="gradient-text">Data Structures</span> and <span className="gradient-text">Algorithms</span>
         </h1>
         <p className="mt-6 max-w-2xl mx-auto text-xl text-gray-300">
           Zero X helps you prepare for technical interviews with AI-generated coding challenges, solutions, and real-time feedback.
         </p>
         
         <div className="mt-10 flex flex-col sm:flex-row gap-4 justify-center">
-          <Button
-            asChild
-            className="px-8 py-6 text-lg"
-            style={{
-              background: 'linear-gradient(123deg, rgba(99, 126, 146, 0.77), rgba(0, 0, 0, 1))',
-              color: 'white',
-            }}
-          >
+          <Button asChild className="bg-gradient-to-r from-zerox-blue to-zerox-purple text-white px-8 py-6 text-lg">
             <Link to="/problems">
               Start Coding <ArrowRight className="ml-2 h-5 w-5" />
             </Link>
@@ -98,7 +62,7 @@ function twoSum(nums, target) {
           </div>
           
           <div className="absolute -bottom-6 left-1/2 transform -translate-x-1/2">
-            <div className="h-12 w-32 rounded-full blur-xl opacity-30" style={{ background: 'linear-gradient(123deg, rgba(99, 126, 146, 0.77), rgba(0, 0, 0, 1))' }}></div>
+            <div className="h-12 w-32 bg-gradient-to-r from-zerox-blue to-zerox-purple rounded-full blur-xl opacity-30"></div>
           </div>
         </div>
       </div>
