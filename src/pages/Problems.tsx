@@ -61,18 +61,42 @@ const defaultTestCases = [
   'Input: nums = [3,3], target = 6 | Expected: [0,1]'
 ];
 
-const initialCode = `/**
+const initialCodeTemplates = {
+  javascript: `/**
  * @param {number[]} nums
  * @param {number} target
  * @return {number[]}
  */
 function twoSum(nums, target) {
   // Your solution here
-};`;
+};`,
+  python: `def two_sum(nums, target):
+    """
+    :type nums: List[int]
+    :type target: int
+    :rtype: List[int]
+    """
+    # Your solution here
+    pass`,
+  java: `class Solution {
+    public int[] twoSum(int[] nums, int target) {
+        // Your solution here
+        return new int[]{0, 0};
+    }
+}`,
+  cpp: `class Solution {
+public:
+    vector<int> twoSum(vector<int>& nums, int target) {
+        // Your solution here
+        return {};
+    }
+};`
+};
 
 const Problems = () => {
   const [currentProblem, setCurrentProblem] = useState(defaultProblem);
-  const [currentCode, setCurrentCode] = useState(initialCode);
+  const [currentLanguage, setCurrentLanguage] = useState('javascript');
+  const [currentCode, setCurrentCode] = useState(initialCodeTemplates.javascript);
   const [showGeneratePanel, setShowGeneratePanel] = useState(false);
   const [testCases, setTestCases] = useState(defaultTestCases);
   
@@ -89,13 +113,15 @@ const Problems = () => {
     }
     
     // Generate starter code
-    setCurrentCode(`/**
- * Problem: ${problem.title}
- * Difficulty: ${problem.difficulty}
- */
-function solution(params) {
-  // Your code here
-}`);
+    const codeTemplate = initialCodeTemplates[currentLanguage as keyof typeof initialCodeTemplates] || 
+      `// Problem: ${problem.title}\n// Difficulty: ${problem.difficulty}\n\n// Your code here`;
+    
+    setCurrentCode(codeTemplate);
+  };
+  
+  const handleLanguageChange = (language: string) => {
+    setCurrentLanguage(language);
+    setCurrentCode(initialCodeTemplates[language as keyof typeof initialCodeTemplates] || currentCode);
   };
   
   return (
@@ -155,7 +181,7 @@ function solution(params) {
             <div>
               <CodeEditor 
                 initialCode={currentCode}
-                language="javascript"
+                language={currentLanguage}
                 onCodeChange={setCurrentCode}
                 testCases={testCases}
               />
