@@ -1,3 +1,4 @@
+
 import { Button } from '@/components/ui/button';
 import { Link } from 'react-router-dom';
 import Navbar from '@/components/Navbar';
@@ -78,7 +79,7 @@ const Index = () => {
           <div className="max-w-7xl mx-auto relative">
             <div className="text-center mb-16">
               <h2 className="text-3xl sm:text-4xl font-bold gradient-text mb-4 transform transition-transform hover:scale-105 duration-300">
-                Supercharge Your Coding Skills
+                <span className="custom-gradient-text">Supercharge Your Coding Skills</span>
               </h2>
               <p className="text-xl text-gray-400 max-w-3xl mx-auto">
                 Zero X combines advanced AI and real-time code execution to help you master data structures and algorithms.
