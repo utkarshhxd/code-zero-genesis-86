@@ -4,9 +4,10 @@ import ProblemViewer from '@/components/ProblemViewer';
 import CodeEditor from '@/components/CodeEditor';
 import ProblemGenerator from '@/components/ProblemGenerator';
 import ProblemSelection from '@/components/ProblemSelection';
-import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
+import CodeGrader from '@/components/CodeGrader';
 import { Button } from '@/components/ui/button';
-import { ArrowLeft, Cpu, List, Plus } from 'lucide-react';
+import { ArrowLeft, List, Plus } from 'lucide-react';
+import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { Link } from 'react-router-dom';
 
 const defaultProblem = {
@@ -183,12 +184,19 @@ const Problems = () => {
                 ) : (
                   <ProblemViewer {...currentProblem} />
                 )}
-                <CodeEditor 
-                  initialCode={currentCode}
-                  language={currentLanguage}
-                  onCodeChange={setCurrentCode}
-                  testCases={testCases}
-                />
+                <div className="space-y-6">
+                  <CodeEditor 
+                    initialCode={currentCode}
+                    language={currentLanguage}
+                    onCodeChange={setCurrentCode}
+                    testCases={testCases}
+                  />
+                  <CodeGrader 
+                    code={currentCode}
+                    language={currentLanguage}
+                    problemTitle={currentProblem.title}
+                  />
+                </div>
               </div>
             </div>
           </>
