@@ -12,38 +12,6 @@ interface CodeEditorProps {
   testCases?: string[];
 }
 
-const languageTemplates = {
-  javascript: `/**
- * @param {number[]} nums
- * @param {number} target
- * @return {number[]}
- */
-function twoSum(nums, target) {
-  // Your solution here
-};`,
-  python: `def two_sum(nums, target):
-    """
-    :type nums: List[int]
-    :type target: int
-    :rtype: List[int]
-    """
-    # Your solution here
-    pass`,
-  java: `class Solution {
-    public int[] twoSum(int[] nums, int target) {
-        // Your solution here
-        return new int[]{0, 0};
-    }
-}`,
-  cpp: `class Solution {
-public:
-    vector<int> twoSum(vector<int>& nums, int target) {
-        // Your solution here
-        return {};
-    }
-};`
-};
-
 const CodeEditor = ({ 
   initialCode = '// Write your solution here', 
   language = 'javascript',
@@ -66,14 +34,10 @@ const CodeEditor = ({
   
   const handleLanguageChange = (value: string) => {
     setSelectedLanguage(value);
-    // Change the code template based on the selected language
-    setCode(languageTemplates[value as keyof typeof languageTemplates] || initialCode);
-    setOutput('');
-    setTestResults([]);
   };
   
   const handleReset = () => {
-    setCode(languageTemplates[selectedLanguage as keyof typeof languageTemplates] || initialCode);
+    setCode(initialCode);
     setOutput('');
     setTestResults([]);
   };

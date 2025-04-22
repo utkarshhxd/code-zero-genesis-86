@@ -20,7 +20,6 @@ export default {
     extend: {
       fontFamily: {
         josefin: ['Josefin Sans', 'sans-serif'],
-        montserrat: ['Montserrat', 'sans-serif'],
       },
       colors: {
         border: "hsl(var(--border))",
