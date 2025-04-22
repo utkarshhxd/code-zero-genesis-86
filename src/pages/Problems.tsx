@@ -1,9 +1,9 @@
-
 import { useState } from 'react';
 import Navbar from '@/components/Navbar';
 import ProblemViewer from '@/components/ProblemViewer';
 import CodeEditor from '@/components/CodeEditor';
 import ProblemGenerator from '@/components/ProblemGenerator';
+import ProblemSelection from '@/components/ProblemSelection';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { Button } from '@/components/ui/button';
 import { ArrowLeft, Cpu, List, Plus } from 'lucide-react';
@@ -94,6 +94,7 @@ public:
 };
 
 const Problems = () => {
+  const [view, setView] = useState<'selection' | 'generate' | 'view'>('selection');
   const [currentProblem, setCurrentProblem] = useState(defaultProblem);
   const [currentLanguage, setCurrentLanguage] = useState('javascript');
   const [currentCode, setCurrentCode] = useState(initialCodeTemplates.javascript);
@@ -123,71 +124,75 @@ const Problems = () => {
     setCurrentLanguage(language);
     setCurrentCode(initialCodeTemplates[language as keyof typeof initialCodeTemplates] || currentCode);
   };
-  
+
+  const handleSelectionChoice = (type: 'generate' | 'view') => {
+    setView(type);
+  };
+
   return (
     <div className="min-h-screen bg-zerox-dark">
       <Navbar />
       
       <main className="pt-16">
-        {/* Header with navigation */}
-        <div className="bg-zerox-darker py-4 border-b border-zerox-gray/20">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="flex items-center justify-between">
-              <div className="flex items-center space-x-4">
-                <Button variant="outline" size="sm" asChild>
-                  <Link to="/">
-                    <ArrowLeft className="h-4 w-4 mr-1" />
-                    Back
-                  </Link>
-                </Button>
-                <h1 className="text-xl font-bold text-white">{currentProblem.title}</h1>
+        {view === 'selection' ? (
+          <ProblemSelection onSelect={handleSelectionChoice} />
+        ) : (
+          <>
+            <div className="bg-zerox-darker py-4 border-b border-zerox-gray/20">
+              <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div className="flex items-center justify-between">
+                  <div className="flex items-center space-x-4">
+                    <Button 
+                      variant="outline" 
+                      size="sm" 
+                      onClick={() => setView('selection')}
+                    >
+                      <ArrowLeft className="h-4 w-4 mr-1" />
+                      Back to Selection
+                    </Button>
+                    <h1 className="text-xl font-bold text-white">{currentProblem.title}</h1>
+                  </div>
+                  
+                  <div className="flex items-center space-x-2">
+                    <Button 
+                      variant="outline" 
+                      size="sm"
+                      onClick={() => setShowGeneratePanel(!showGeneratePanel)}
+                    >
+                      {showGeneratePanel ? (
+                        <>
+                          <List className="h-4 w-4 mr-1" />
+                          Show Problems
+                        </>
+                      ) : (
+                        <>
+                          <Plus className="h-4 w-4 mr-1" />
+                          Generate New
+                        </>
+                      )}
+                    </Button>
+                  </div>
+                </div>
               </div>
-              
-              <div className="flex items-center space-x-2">
-                <Button 
-                  variant="outline" 
-                  size="sm"
-                  onClick={() => setShowGeneratePanel(!showGeneratePanel)}
-                >
-                  {showGeneratePanel ? (
-                    <>
-                      <List className="h-4 w-4 mr-1" />
-                      Show Problems
-                    </>
-                  ) : (
-                    <>
-                      <Plus className="h-4 w-4 mr-1" />
-                      Generate New
-                    </>
-                  )}
-                </Button>
+            </div>
+
+            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+              <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                {view === 'generate' ? (
+                  <ProblemGenerator onProblemGenerated={handleProblemGenerated} />
+                ) : (
+                  <ProblemViewer {...currentProblem} />
+                )}
+                <CodeEditor 
+                  initialCode={currentCode}
+                  language={currentLanguage}
+                  onCodeChange={setCurrentCode}
+                  testCases={testCases}
+                />
               </div>
             </div>
-          </div>
-        </div>
-        
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-            {/* Left Column: Problem or Generator */}
-            <div>
-              {showGeneratePanel ? (
-                <ProblemGenerator onProblemGenerated={handleProblemGenerated} />
-              ) : (
-                <ProblemViewer {...currentProblem} />
-              )}
-            </div>
-            
-            {/* Right Column: Code Editor */}
-            <div>
-              <CodeEditor 
-                initialCode={currentCode}
-                language={currentLanguage}
-                onCodeChange={setCurrentCode}
-                testCases={testCases}
-              />
-            </div>
-          </div>
-        </div>
+          </>
+        )}
       </main>
     </div>
   );
