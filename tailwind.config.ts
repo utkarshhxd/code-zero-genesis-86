@@ -20,6 +20,7 @@ export default {
     extend: {
       fontFamily: {
         josefin: ['Josefin Sans', 'sans-serif'],
+        nikea: ['Nikea Sans', 'sans-serif'],
       },
       colors: {
         border: "hsl(var(--border))",
