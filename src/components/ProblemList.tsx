@@ -1,12 +1,19 @@
-
 import { List } from "lucide-react";
 import { ScrollArea } from "./ui/scroll-area";
 
-interface Problem {
+export interface Problem {
   id: number;
   title: string;
   difficulty: 'easy' | 'medium' | 'hard';
   description: string;
+  examples: Array<{
+    input: string;
+    output: string;
+    explanation?: string;
+  }>;
+  constraints: string[];
+  hints?: string[];
+  solution?: string;
 }
 
 interface ProblemListProps {
@@ -14,12 +21,79 @@ interface ProblemListProps {
 }
 
 const problems: Problem[] = [
-  { id: 1, title: 'Two Sum', difficulty: 'easy', description: 'Find two numbers that add up to a target' },
-  { id: 2, title: 'Add Two Numbers', difficulty: 'medium', description: 'Add two numbers represented by linked lists' },
-  { id: 3, title: 'Longest Substring', difficulty: 'medium', description: 'Find longest substring without repeating characters' },
-  { id: 4, title: 'Median of Arrays', difficulty: 'hard', description: 'Find median of two sorted arrays' },
-  { id: 5, title: 'Palindrome Number', difficulty: 'easy', description: 'Determine if a number reads the same backward' },
-  // Add more problems as needed
+  { 
+    id: 1, 
+    title: 'Two Sum', 
+    difficulty: 'easy', 
+    description: 'Find two numbers that add up to a target',
+    examples: [
+      {
+        input: 'nums = [2,7,11,15], target = 9',
+        output: '[0,1]',
+        explanation: 'Because nums[0] + nums[1] == 9, we return [0, 1].'
+      }
+    ],
+    constraints: ['2 <= nums.length <= 10^4', '-10^9 <= nums[i] <= 10^9'],
+    hints: ['Try using a hash map to store values'],
+    solution: 'function twoSum(nums, target) { /* solution code */ }'
+  },
+  { 
+    id: 2, 
+    title: 'Add Two Numbers', 
+    difficulty: 'medium', 
+    description: 'Add two numbers represented by linked lists',
+    examples: [
+      {
+        input: 'l1 = [2,4,3], l2 = [5,6,4]',
+        output: '[7,0,8]',
+        explanation: '342 + 465 = 807.'
+      }
+    ],
+    constraints: ['The number of nodes in each linked list is in the range [1, 100]'],
+    hints: ['Keep track of the carry using a variable']
+  },
+  { 
+    id: 3, 
+    title: 'Longest Substring', 
+    difficulty: 'medium', 
+    description: 'Find longest substring without repeating characters',
+    examples: [
+      {
+        input: 's = "abcabcbb"',
+        output: '3',
+        explanation: 'The answer is "abc", with the length of 3.'
+      }
+    ],
+    constraints: ['0 <= s.length <= 5 * 10^4', 's consists of English letters, digits, symbols and spaces.']
+  },
+  { 
+    id: 4, 
+    title: 'Median of Arrays', 
+    difficulty: 'hard', 
+    description: 'Find median of two sorted arrays',
+    examples: [
+      {
+        input: 'nums1 = [1,3], nums2 = [2]',
+        output: '2.00000',
+        explanation: 'Merged array = [1,2,3] and median is 2.'
+      }
+    ],
+    constraints: ['nums1.length == m', 'nums2.length == n', '0 <= m <= 1000', '0 <= n <= 1000']
+  },
+  { 
+    id: 5, 
+    title: 'Palindrome Number', 
+    difficulty: 'easy', 
+    description: 'Determine if a number reads the same backward',
+    examples: [
+      {
+        input: 'x = 121',
+        output: 'true',
+        explanation: '121 reads as 121 from left to right and from right to left.'
+      }
+    ],
+    constraints: ['-2^31 <= x <= 2^31 - 1']
+  }
 ];
 
 const ProblemList = ({ onSelectProblem }: ProblemListProps) => {

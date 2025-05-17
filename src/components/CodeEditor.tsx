@@ -1,4 +1,3 @@
-
 import { useState, useEffect } from 'react';
 import { Button } from '@/components/ui/button';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
@@ -10,6 +9,7 @@ interface CodeEditorProps {
   language?: string;
   onCodeChange?: (code: string) => void;
   testCases?: string[];
+  onLanguageChange?: (language: string) => void;
 }
 
 const languageTemplates = {
@@ -48,7 +48,8 @@ const CodeEditor = ({
   initialCode = '// Write your solution here', 
   language = 'javascript',
   onCodeChange,
-  testCases = []
+  testCases = [],
+  onLanguageChange
 }: CodeEditorProps) => {
   const [code, setCode] = useState(initialCode);
   const [selectedLanguage, setSelectedLanguage] = useState(language);
@@ -70,6 +71,10 @@ const CodeEditor = ({
     setCode(languageTemplates[value as keyof typeof languageTemplates] || initialCode);
     setOutput('');
     setTestResults([]);
+    
+    if (onLanguageChange) {
+      onLanguageChange(value);
+    }
   };
   
   const handleReset = () => {

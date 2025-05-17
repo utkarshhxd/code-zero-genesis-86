@@ -5,14 +5,15 @@ import ProblemViewer from '@/components/ProblemViewer';
 import CodeEditor from '@/components/CodeEditor';
 import ProblemGenerator from '@/components/ProblemGenerator';
 import ProblemSelection from '@/components/ProblemSelection';
-import ProblemList from '@/components/ProblemList';
+import ProblemList, { Problem } from '@/components/ProblemList';
 import CodeGrader from '@/components/CodeGrader';
 import { Button } from '@/components/ui/button';
 import { ArrowLeft, Book, Code } from 'lucide-react';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { Link } from 'react-router-dom';
 
-const defaultProblem = {
+const defaultProblem: Problem = {
+  id: 0,
   title: "Two Sum",
   difficulty: "easy" as const,
   description: `<p>Given an array of integers <code>nums</code> and an integer <code>target</code>, return indices of the two numbers such that they add up to <code>target</code>.</p>
@@ -98,7 +99,7 @@ public:
 
 const Problems = () => {
   const [view, setView] = useState<'selection' | 'generate' | 'view'>('selection');
-  const [currentProblem, setCurrentProblem] = useState(defaultProblem);
+  const [currentProblem, setCurrentProblem] = useState<Problem>(defaultProblem);
   const [currentLanguage, setCurrentLanguage] = useState('javascript');
   const [currentCode, setCurrentCode] = useState(initialCodeTemplates.javascript);
   const [showGeneratePanel, setShowGeneratePanel] = useState(false);
@@ -224,3 +225,4 @@ const Problems = () => {
 };
 
 export default Problems;
+
