@@ -16,7 +16,7 @@ interface ProblemGeneratorProps {
 const ProblemGenerator = ({ onProblemGenerated }: ProblemGeneratorProps) => {
   const [topic, setTopic] = useState('');
   const [difficulty, setDifficulty] = useState('medium');
-  const [complexity, setComplexity] = useState([50]); // 0-100 scale
+  const [complexity, setComplexity] = useState([50]);
   const [customInstructions, setCustomInstructions] = useState('');
   const [generating, setGenerating] = useState(false);
   
@@ -47,32 +47,32 @@ const ProblemGenerator = ({ onProblemGenerated }: ProblemGeneratorProps) => {
   };
   
   return (
-    <div className="glass-card rounded-xl p-6 space-y-6">
-      <h2 className="text-xl font-bold text-white">Generate New Problem</h2>
+    <div className="glass-panel rounded-lg p-5 space-y-5 animate-subtle-fade">
+      <h2 className="text-lg font-medium text-white">Generate New Problem</h2>
       
       <div className="space-y-4">
         <div>
-          <label htmlFor="topic" className="block text-sm font-medium text-gray-300 mb-1">
+          <label htmlFor="topic" className="block text-sm font-medium text-gray-300 mb-1.5">
             Topic or Data Structure
           </label>
           <Input
             id="topic"
             placeholder="e.g., Arrays, Linked Lists, Binary Trees"
-            className="bg-zerox-light/30 border-zerox-gray text-white"
+            className="bg-zerox-darker border-zerox-gray/20 text-white"
             value={topic}
             onChange={(e) => setTopic(e.target.value)}
           />
         </div>
         
         <div>
-          <label htmlFor="difficulty" className="block text-sm font-medium text-gray-300 mb-1">
+          <label htmlFor="difficulty" className="block text-sm font-medium text-gray-300 mb-1.5">
             Difficulty Level
           </label>
           <Select value={difficulty} onValueChange={setDifficulty}>
-            <SelectTrigger id="difficulty" className="bg-zerox-light/30 border-zerox-gray text-white">
+            <SelectTrigger id="difficulty" className="bg-zerox-darker border-zerox-gray/20 text-white">
               <SelectValue placeholder="Select difficulty" />
             </SelectTrigger>
-            <SelectContent>
+            <SelectContent className="bg-zerox-darker border-zerox-gray/20 text-white">
               <SelectItem value="easy">Easy</SelectItem>
               <SelectItem value="medium">Medium</SelectItem>
               <SelectItem value="hard">Hard</SelectItem>
@@ -81,10 +81,10 @@ const ProblemGenerator = ({ onProblemGenerated }: ProblemGeneratorProps) => {
         </div>
         
         <div>
-          <label className="block text-sm font-medium text-gray-300 mb-1">
+          <label className="block text-sm font-medium text-gray-300 mb-1.5">
             Problem Complexity
           </label>
-          <div className="pt-2 px-2">
+          <div className="pt-2 px-1">
             <Slider
               value={complexity}
               max={100}
@@ -100,13 +100,13 @@ const ProblemGenerator = ({ onProblemGenerated }: ProblemGeneratorProps) => {
         </div>
         
         <div>
-          <label htmlFor="instructions" className="block text-sm font-medium text-gray-300 mb-1">
+          <label htmlFor="instructions" className="block text-sm font-medium text-gray-300 mb-1.5">
             Custom Instructions (Optional)
           </label>
           <Textarea
             id="instructions"
-            placeholder="Add any specific requirements or constraints for the problem..."
-            className="bg-zerox-light/30 border-zerox-gray text-white min-h-[100px]"
+            placeholder="Add specific requirements or constraints..."
+            className="bg-zerox-darker border-zerox-gray/20 text-white min-h-[80px]"
             value={customInstructions}
             onChange={(e) => setCustomInstructions(e.target.value)}
           />
@@ -116,7 +116,7 @@ const ProblemGenerator = ({ onProblemGenerated }: ProblemGeneratorProps) => {
       <Button 
         onClick={handleGenerate} 
         disabled={generating} 
-        className="w-full bg-gradient-to-r from-zerox-blue to-zerox-purple hover:opacity-90 transition-opacity"
+        className="w-full bg-zerox-blue hover:bg-zerox-blue/90 text-white transition-colors"
       >
         {generating ? (
           <>

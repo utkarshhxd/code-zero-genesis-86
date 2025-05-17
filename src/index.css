@@ -1,3 +1,4 @@
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -49,7 +50,11 @@
   }
 
   .glass-card {
-    @apply bg-zerox-light/90 backdrop-blur-md border border-white/10 shadow-lg;
+    @apply bg-zerox-light/80 backdrop-blur-md border border-white/10 shadow-md;
+  }
+
+  .glass-panel {
+    @apply bg-zerox-light/30 backdrop-blur-sm border border-white/5;
   }
 
   .gradient-text {
@@ -60,24 +65,6 @@
     -webkit-text-fill-color: transparent;
     background-clip: text;
     color: transparent;
-  }
-
-  .gradient-border {
-    @apply relative before:absolute before:inset-0 before:p-[1px] before:bg-gradient-to-r before:from-zerox-blue before:to-zerox-purple before:rounded-md before:-z-10 before:content-[''] z-0;
-  }
-
-  .custom-gradient-text {
-    background: linear-gradient(123deg, rgba(212, 223, 232, 0.77), rgba(58, 116, 152, 1), rgba(0, 43, 77, 1));
-    -webkit-background: linear-gradient(123deg, rgba(212, 223, 232, 0.77), rgba(58, 116, 152, 1), rgba(0, 43, 77, 1));
-    -moz-background: linear-gradient(123deg, rgba(212, 223, 232, 0.77), rgba(58, 116, 152, 1), rgba(0, 43, 77, 1));
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-    color: transparent;
-  }
-
-  code, pre {
-    font-family: 'JetBrains Mono', monospace;
   }
 }
 
@@ -92,6 +79,27 @@
   }
 }
 
+@keyframes subtle-fade-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
 .animate-fade-in {
   animation: fade-in 0.3s ease-out forwards;
+}
+
+.animate-subtle-fade {
+  animation: subtle-fade-in 0.4s ease-out forwards;
+}
+
+.problem-item {
+  transition: all 0.2s ease-out;
+}
+
+.problem-item:hover {
+  transform: translateY(-2px);
 }

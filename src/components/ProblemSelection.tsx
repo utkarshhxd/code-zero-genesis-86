@@ -8,26 +8,24 @@ interface ProblemSelectionProps {
 
 const ProblemSelection = ({ onSelect }: ProblemSelectionProps) => {
   return (
-    <div className="flex flex-col items-center justify-center min-h-[60vh] gap-8">
-      <div className="text-center mb-8">
-        <h2 className="text-3xl font-bold mb-3">
-          <span>Master</span> Coding Challenges 
-          <span className="font-nikea"> and </span> Get Graded
+    <div className="flex flex-col items-center justify-center min-h-[60vh] gap-8 animate-subtle-fade">
+      <div className="text-center mb-6 max-w-lg">
+        <h2 className="text-3xl font-medium mb-3 text-white">
+          Practice Coding Problems
         </h2>
-        <p className="text-gray-400 max-w-2xl mx-auto">
-          Practice with AI-generated problems or browse our collection. Submit your solutions and get instant feedback on your code quality.
+        <p className="text-gray-400 text-sm">
+          Generate custom coding challenges or browse our collection. 
+          Get instant feedback on your solutions.
         </p>
       </div>
       
       <Button 
-        variant="outline" 
-        size="lg"
-        className="h-16 glass-card flex items-center justify-center gap-4 px-8 hover:scale-105 transition-all duration-300
-                   bg-zerox-blue hover:bg-zerox-blue/90 text-white font-bold text-lg shadow-lg hover:shadow-zerox-blue/20"
         onClick={() => onSelect('generate')}
+        className="flex items-center gap-2 px-6 py-6 bg-zerox-blue hover:bg-zerox-blue/90 text-white 
+                 rounded-lg transition-all duration-300 hover:shadow-lg hover:shadow-zerox-blue/20 hover:-translate-y-1"
       >
-        <Plus className="h-6 w-6" />
-        Generate New Problem
+        <Plus className="h-5 w-5" />
+        <span className="font-medium">Generate Problem</span>
       </Button>
     </div>
   );

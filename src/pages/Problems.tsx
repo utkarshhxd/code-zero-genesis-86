@@ -135,20 +135,20 @@ const Problems = () => {
     <div className="min-h-screen bg-zerox-dark">
       <Navbar />
       
-      <main className="flex">
+      <main className="flex pt-16"> {/* Added pt-16 to account for fixed navbar */}
         {view !== 'selection' && <ProblemList />}
-        <div className="flex-1">
+        <div className={`flex-1 ${view !== 'selection' ? 'animate-subtle-fade' : ''}`}>
           {view === 'selection' ? (
             <ProblemSelection onSelect={handleSelectionChoice} />
           ) : (
-            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-              <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
+              <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
                 {view === 'generate' ? (
                   <ProblemGenerator onProblemGenerated={handleProblemGenerated} />
                 ) : (
                   <ProblemViewer {...currentProblem} />
                 )}
-                <div className="space-y-6">
+                <div className="space-y-5">
                   <CodeEditor 
                     initialCode={currentCode}
                     language={currentLanguage}
