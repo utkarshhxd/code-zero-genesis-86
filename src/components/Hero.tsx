@@ -1,3 +1,4 @@
+
 import { Button } from '@/components/ui/button';
 import { ArrowRight } from 'lucide-react';
 import { Link } from 'react-router-dom';
@@ -11,21 +12,19 @@ const Hero = () => {
       
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-20 pb-16 text-center">
         <h1 className="sm:text-5xl md:text-6xl font-extrabold font-josefin text-white text-4xl">
-          <span className="align-middle font-['Canicule_Display_Typeface'] capitalize" style={{
+          <span className="block md:inline-block align-middle font-['Canicule_Display_Typeface'] capitalize" style={{
             fontSize: '0.8em',
-            textTransform: 'capitalize',
-            display: 'inline-block'
+            textTransform: 'capitalize'
           }}>Master</span>
-          <span className="mx-2 text-transparent custom-gradient-text text-[1.15em] font-josefin font-extrabold align-middle">
-            {" Data Structures "}
+          <span className="mx-2 text-transparent bg-clip-text bg-gradient-to-r from-zerox-blue to-zerox-blue-light text-[1.15em] font-josefin font-extrabold">
+            Data Structures
           </span>
-          <span className="align-middle font-['Canicule_Display_Typeface'] capitalize" style={{
+          <span className="block md:inline-block align-middle font-['Canicule_Display_Typeface'] capitalize" style={{
             fontSize: '0.8em',
-            textTransform: 'capitalize',
-            display: 'inline-block'
+            textTransform: 'capitalize'
           }}>And</span>
-          <span className="mx-2 text-transparent custom-gradient-text text-[1.15em] font-josefin font-extrabold align-middle">
-            {" Algorithms "}
+          <span className="mx-2 text-transparent bg-clip-text bg-gradient-to-r from-zerox-blue to-zerox-blue-light text-[1.15em] font-josefin font-extrabold">
+            Algorithms
           </span>
         </h1>
         <p className="mt-6 max-w-2xl mx-auto text-xl text-gray-300">
@@ -35,17 +34,16 @@ const Hero = () => {
         <div className="mt-10 flex flex-col sm:flex-row gap-4 justify-center">
           <Button 
             asChild 
-            className="text-white px-8 py-6 text-lg border-0" 
+            className="text-white px-8 py-6 text-lg border-0 hover:shadow-lg hover:shadow-zerox-blue/20 transition-all" 
             style={{
-              background: "linear-gradient(123deg, rgba(212, 223, 232, 0.77), rgba(58, 116, 152, 1), rgba(0, 43, 77, 1))",
-              WebkitBackgroundClip: "border-box"
+              background: "linear-gradient(90deg, rgba(0,180,216,1) 0%, rgba(114,9,183,1) 100%)",
             }}
           >
             <Link to="/problems">
               Start Coding <ArrowRight className="ml-2 h-5 w-5" />
             </Link>
           </Button>
-          <Button variant="outline" className="px-8 py-6 text-lg">
+          <Button variant="outline" className="px-8 py-6 text-lg border-zerox-gray/30 hover:bg-zerox-gray/20">
             Learn More
           </Button>
         </div>

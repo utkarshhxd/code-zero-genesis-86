@@ -9,6 +9,10 @@ interface Problem {
   description: string;
 }
 
+interface ProblemListProps {
+  onSelectProblem?: (problem: Problem) => void;
+}
+
 const problems: Problem[] = [
   { id: 1, title: 'Two Sum', difficulty: 'easy', description: 'Find two numbers that add up to a target' },
   { id: 2, title: 'Add Two Numbers', difficulty: 'medium', description: 'Add two numbers represented by linked lists' },
@@ -18,7 +22,7 @@ const problems: Problem[] = [
   // Add more problems as needed
 ];
 
-const ProblemList = () => {
+const ProblemList = ({ onSelectProblem }: ProblemListProps) => {
   const getDifficultyColor = (difficulty: Problem['difficulty']) => {
     switch (difficulty) {
       case 'easy':
@@ -31,12 +35,12 @@ const ProblemList = () => {
   };
 
   return (
-    <div className="w-72 bg-zerox-darker border-r border-zerox-gray/10 h-screen">
+    <div className="w-64 bg-zerox-darker border-r border-zerox-gray/10 h-full flex flex-col">
       <div className="p-4 border-b border-zerox-gray/10 flex items-center">
         <List className="h-5 w-5 mr-2 text-zerox-blue" />
-        <h2 className="text-lg font-medium">Problems</h2>
+        <h2 className="text-base font-medium">Problems</h2>
       </div>
-      <ScrollArea className="h-[calc(100vh-64px)]">
+      <ScrollArea className="flex-1">
         <div className="p-3 space-y-1.5">
           {problems.map((problem, index) => (
             <button
@@ -44,6 +48,7 @@ const ProblemList = () => {
               className="w-full text-left p-3 rounded-md hover:bg-zerox-light/20 transition-all duration-200 
                        animate-subtle-fade problem-item opacity-0"
               style={{ animationDelay: `${index * 50}ms` }}
+              onClick={() => onSelectProblem?.(problem)}
             >
               <div className="flex items-center justify-between">
                 <span className="text-xs text-gray-500">#{problem.id}</span>

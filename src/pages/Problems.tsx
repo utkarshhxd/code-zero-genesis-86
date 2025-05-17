@@ -1,3 +1,4 @@
+
 import { useState } from 'react';
 import Navbar from '@/components/Navbar';
 import ProblemViewer from '@/components/ProblemViewer';
@@ -7,7 +8,7 @@ import ProblemSelection from '@/components/ProblemSelection';
 import ProblemList from '@/components/ProblemList';
 import CodeGrader from '@/components/CodeGrader';
 import { Button } from '@/components/ui/button';
-import { ArrowLeft, List, Plus } from 'lucide-react';
+import { ArrowLeft, Book, Code } from 'lucide-react';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { Link } from 'react-router-dom';
 
@@ -102,14 +103,16 @@ const Problems = () => {
   const [currentCode, setCurrentCode] = useState(initialCodeTemplates.javascript);
   const [showGeneratePanel, setShowGeneratePanel] = useState(false);
   const [testCases, setTestCases] = useState(defaultTestCases);
+  const [activeTab, setActiveTab] = useState<'code' | 'problem'>('problem');
   
   const handleProblemGenerated = (problem: any) => {
     setCurrentProblem(problem);
     setShowGeneratePanel(false);
+    setView('view');
     
     // Update test cases based on the problem examples
     if (problem.examples) {
-      const newTestCases = problem.examples.map((example: any, index: number) => 
+      const newTestCases = problem.examples.map((example: any) => 
         `Input: ${example.input} | Expected: ${example.output}`
       );
       setTestCases(newTestCases);
@@ -129,38 +132,88 @@ const Problems = () => {
 
   const handleSelectionChoice = (type: 'generate' | 'view') => {
     setView(type);
+    if (type === 'generate') {
+      setActiveTab('problem');
+    }
+  };
+
+  const handleBackToSelection = () => {
+    setView('selection');
   };
 
   return (
-    <div className="min-h-screen bg-zerox-dark">
+    <div className="h-screen overflow-hidden bg-zerox-dark flex flex-col">
       <Navbar />
       
-      <main className="flex pt-16"> {/* Added pt-16 to account for fixed navbar */}
-        {view !== 'selection' && <ProblemList />}
-        <div className={`flex-1 ${view !== 'selection' ? 'animate-subtle-fade' : ''}`}>
+      <main className="flex flex-1 pt-16 overflow-hidden"> {/* Added overflow-hidden and flex-1 */}
+        {view !== 'selection' && <ProblemList onSelectProblem={(problem) => setCurrentProblem(problem)} />}
+        
+        <div className={`flex-1 ${view !== 'selection' ? 'animate-subtle-fade' : ''} overflow-y-auto`}>
           {view === 'selection' ? (
             <ProblemSelection onSelect={handleSelectionChoice} />
           ) : (
-            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
-              <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-                {view === 'generate' ? (
-                  <ProblemGenerator onProblemGenerated={handleProblemGenerated} />
-                ) : (
-                  <ProblemViewer {...currentProblem} />
+            <div className="h-full flex flex-col">
+              {/* Header with back button */}
+              <div className="p-4 border-b border-zerox-gray/10 flex items-center gap-4">
+                <Button 
+                  variant="outline" 
+                  size="sm" 
+                  className="border-zerox-gray/20 bg-transparent hover:bg-zerox-gray/10"
+                  onClick={handleBackToSelection}
+                >
+                  <ArrowLeft className="h-4 w-4 mr-1" />
+                  Back
+                </Button>
+                
+                {view === 'view' && (
+                  <Tabs 
+                    defaultValue="problem" 
+                    value={activeTab} 
+                    onValueChange={(value) => setActiveTab(value as 'problem' | 'code')}
+                    className="ml-4"
+                  >
+                    <TabsList className="bg-zerox-light/30">
+                      <TabsTrigger value="problem" className="gap-2 data-[state=active]:bg-zerox-blue/20">
+                        <Book className="h-4 w-4" />
+                        Problem
+                      </TabsTrigger>
+                      <TabsTrigger value="code" className="gap-2 data-[state=active]:bg-zerox-blue/20">
+                        <Code className="h-4 w-4" />
+                        Solution
+                      </TabsTrigger>
+                    </TabsList>
+                  </Tabs>
                 )}
-                <div className="space-y-5">
-                  <CodeEditor 
-                    initialCode={currentCode}
-                    language={currentLanguage}
-                    onCodeChange={setCurrentCode}
-                    testCases={testCases}
-                  />
-                  <CodeGrader 
-                    code={currentCode}
-                    language={currentLanguage}
-                    problemTitle={currentProblem.title}
-                  />
-                </div>
+              </div>
+
+              {/* Main content area */}
+              <div className="flex-1 overflow-y-auto p-6">
+                {view === 'generate' ? (
+                  <div className="max-w-2xl mx-auto">
+                    <ProblemGenerator onProblemGenerated={handleProblemGenerated} />
+                  </div>
+                ) : (
+                  <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                    {activeTab === 'problem' ? (
+                      <ProblemViewer {...currentProblem} />
+                    ) : (
+                      <div className="space-y-5">
+                        <CodeEditor 
+                          initialCode={currentCode}
+                          language={currentLanguage}
+                          onCodeChange={setCurrentCode}
+                          testCases={testCases}
+                          onLanguageChange={handleLanguageChange}
+                        />
+                        <CodeGrader 
+                          code={currentCode}
+                          language={currentLanguage}
+                          problemTitle={currentProblem.title}
+                        />
+                      </div>
+                    )}
+                  </div>
+                )}
               </div>
             </div>
           )}
