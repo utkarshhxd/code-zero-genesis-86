@@ -11,6 +11,7 @@ import { Button } from '@/components/ui/button';
 import { ArrowLeft, Book, Code } from 'lucide-react';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { Link } from 'react-router-dom';
+import { ResizablePanelGroup, ResizablePanel, ResizableHandle } from '@/components/ui/resizable';
 
 const defaultProblem: Problem = {
   id: 0,
@@ -104,16 +105,15 @@ const Problems = () => {
   const [currentCode, setCurrentCode] = useState(initialCodeTemplates.javascript);
   const [showGeneratePanel, setShowGeneratePanel] = useState(false);
   const [testCases, setTestCases] = useState(defaultTestCases);
-  const [activeTab, setActiveTab] = useState<'code' | 'problem'>('problem');
   
-  const handleProblemGenerated = (problem: any) => {
+  const handleProblemGenerated = (problem: Problem) => {
     setCurrentProblem(problem);
     setShowGeneratePanel(false);
     setView('view');
     
     // Update test cases based on the problem examples
     if (problem.examples) {
-      const newTestCases = problem.examples.map((example: any) => 
+      const newTestCases = problem.examples.map((example) => 
         `Input: ${example.input} | Expected: ${example.output}`
       );
       setTestCases(newTestCases);
@@ -133,9 +133,6 @@ const Problems = () => {
 
   const handleSelectionChoice = (type: 'generate' | 'view') => {
     setView(type);
-    if (type === 'generate') {
-      setActiveTab('problem');
-    }
   };
 
   const handleBackToSelection = () => {
@@ -146,10 +143,10 @@ const Problems = () => {
     <div className="h-screen overflow-hidden bg-zerox-dark flex flex-col">
       <Navbar />
       
-      <main className="flex flex-1 pt-16 overflow-hidden"> {/* Added overflow-hidden and flex-1 */}
+      <main className="flex flex-1 pt-16 overflow-hidden">
         {view !== 'selection' && <ProblemList onSelectProblem={(problem) => setCurrentProblem(problem)} />}
         
-        <div className={`flex-1 ${view !== 'selection' ? 'animate-subtle-fade' : ''} overflow-y-auto`}>
+        <div className={`flex-1 ${view !== 'selection' ? 'animate-subtle-fade' : ''} overflow-hidden flex flex-col`}>
           {view === 'selection' ? (
             <ProblemSelection onSelect={handleSelectionChoice} />
           ) : (
@@ -167,38 +164,28 @@ const Problems = () => {
                 </Button>
                 
                 {view === 'view' && (
-                  <Tabs 
-                    defaultValue="problem" 
-                    value={activeTab} 
-                    onValueChange={(value) => setActiveTab(value as 'problem' | 'code')}
-                    className="ml-4"
-                  >
-                    <TabsList className="bg-zerox-light/30">
-                      <TabsTrigger value="problem" className="gap-2 data-[state=active]:bg-zerox-blue/20">
-                        <Book className="h-4 w-4" />
-                        Problem
-                      </TabsTrigger>
-                      <TabsTrigger value="code" className="gap-2 data-[state=active]:bg-zerox-blue/20">
-                        <Code className="h-4 w-4" />
-                        Solution
-                      </TabsTrigger>
-                    </TabsList>
-                  </Tabs>
+                  <h2 className="text-lg font-medium text-white">{currentProblem.title}</h2>
                 )}
               </div>
 
-              {/* Main content area */}
-              <div className="flex-1 overflow-y-auto p-6">
+              {/* Main content area with resizable panels */}
+              <div className="flex-1 overflow-hidden">
                 {view === 'generate' ? (
-                  <div className="max-w-2xl mx-auto">
+                  <div className="max-w-2xl mx-auto p-6">
                     <ProblemGenerator onProblemGenerated={handleProblemGenerated} />
                   </div>
                 ) : (
-                  <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-                    {activeTab === 'problem' ? (
-                      <ProblemViewer {...currentProblem} />
-                    ) : (
-                      <div className="space-y-5">
+                  <ResizablePanelGroup direction="horizontal" className="h-full">
+                    <ResizablePanel defaultSize={50} minSize={30}>
+                      <div className="h-full overflow-y-auto p-4">
+                        <ProblemViewer {...currentProblem} />
+                      </div>
+                    </ResizablePanel>
+                    
+                    <ResizableHandle withHandle />
+                    
+                    <ResizablePanel defaultSize={50} minSize={30}>
+                      <div className="h-full flex flex-col p-4">
                         <CodeEditor 
                           initialCode={currentCode}
                           language={currentLanguage}
@@ -206,14 +193,16 @@ const Problems = () => {
                           testCases={testCases}
                           onLanguageChange={handleLanguageChange}
                         />
-                        <CodeGrader 
-                          code={currentCode}
-                          language={currentLanguage}
-                          problemTitle={currentProblem.title}
-                        />
+                        <div className="mt-4">
+                          <CodeGrader 
+                            code={currentCode}
+                            language={currentLanguage}
+                            problemTitle={currentProblem.title}
+                          />
+                        </div>
                       </div>
-                    )}
-                  </div>
+                    </ResizablePanel>
+                  </ResizablePanelGroup>
                 )}
               </div>
             </div>
@@ -225,4 +214,3 @@ const Problems = () => {
 };
 
 export default Problems;
-
