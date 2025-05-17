@@ -1,8 +1,21 @@
-import { useState, useEffect } from 'react';
+
+import { useState, useEffect, useRef } from 'react';
 import { Button } from '@/components/ui/button';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { Play, RotateCcw } from 'lucide-react';
 import { executeCode } from '@/services/judge0';
+import hljs from 'highlight.js/lib/core';
+import javascript from 'highlight.js/lib/languages/javascript';
+import python from 'highlight.js/lib/languages/python';
+import java from 'highlight.js/lib/languages/java';
+import cpp from 'highlight.js/lib/languages/cpp';
+import 'highlight.js/styles/atom-one-dark.css';
+
+// Register languages for syntax highlighting
+hljs.registerLanguage('javascript', javascript);
+hljs.registerLanguage('python', python);
+hljs.registerLanguage('java', java);
+hljs.registerLanguage('cpp', cpp);
 
 interface CodeEditorProps {
   initialCode?: string;
@@ -44,6 +57,22 @@ public:
 };`
 };
 
+// Language display names
+const languageDisplayNames = {
+  javascript: 'JavaScript',
+  python: 'Python',
+  java: 'Java',
+  cpp: 'C++'
+};
+
+// Language file extensions for syntax highlighting
+const languageExtensions = {
+  javascript: 'js',
+  python: 'py',
+  java: 'java',
+  cpp: 'cpp'
+};
+
 const CodeEditor = ({ 
   initialCode = '// Write your solution here', 
   language = 'javascript',
@@ -56,6 +85,25 @@ const CodeEditor = ({
   const [isExecuting, setIsExecuting] = useState(false);
   const [output, setOutput] = useState('');
   const [testResults, setTestResults] = useState<Array<{passed: boolean, message: string}>>([]);
+  const [lineNumbers, setLineNumbers] = useState<string[]>([]);
+  const textareaRef = useRef<HTMLTextAreaElement>(null);
+  const previewRef = useRef<HTMLPreElement>(null);
+  
+  // Generate line numbers based on code content
+  useEffect(() => {
+    const lines = code.split('\n').length;
+    setLineNumbers(Array.from({ length: lines }, (_, i) => String(i + 1)));
+  }, [code]);
+  
+  // Apply syntax highlighting
+  useEffect(() => {
+    if (previewRef.current) {
+      previewRef.current.innerHTML = hljs.highlight(
+        code, 
+        { language: languageExtensions[selectedLanguage as keyof typeof languageExtensions] || 'plaintext' }
+      ).value;
+    }
+  }, [code, selectedLanguage]);
   
   const handleCodeChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
     const newCode = e.target.value;
@@ -113,14 +161,37 @@ const CodeEditor = ({
     }
   };
   
-  // Adjust textarea height to content
-  useEffect(() => {
-    const textarea = document.getElementById('code-editor') as HTMLTextAreaElement;
-    if (textarea) {
-      textarea.style.height = 'auto';
-      textarea.style.height = `${textarea.scrollHeight}px`;
+  // Adjust for tab key in textarea
+  const handleKeyDown = (e: React.KeyboardEvent<HTMLTextAreaElement>) => {
+    if (e.key === 'Tab') {
+      e.preventDefault();
+      
+      const textarea = e.currentTarget;
+      const start = textarea.selectionStart;
+      const end = textarea.selectionEnd;
+      
+      // Insert 4 spaces (or 2 spaces) for indentation
+      const newCode = 
+        code.substring(0, start) + '    ' + code.substring(end);
+      
+      setCode(newCode);
+      if (onCodeChange) {
+        onCodeChange(newCode);
+      }
+      
+      // Move cursor position after the inserted tab
+      setTimeout(() => {
+        textarea.selectionStart = textarea.selectionEnd = start + 4;
+      }, 0);
     }
-  }, [code]);
+  };
+  
+  // Synchronize scroll position between textarea and preview
+  const handleScroll = (e: React.UIEvent<HTMLTextAreaElement>) => {
+    if (previewRef.current) {
+      previewRef.current.scrollTop = e.currentTarget.scrollTop;
+    }
+  };
   
   return (
     <div className="glass-card rounded-xl overflow-hidden">
@@ -136,7 +207,7 @@ const CodeEditor = ({
             <SelectTrigger className="w-[180px] bg-zerox-dark/50 border-zerox-gray">
               <SelectValue placeholder="Select Language" />
             </SelectTrigger>
-            <SelectContent>
+            <SelectContent className="bg-zerox-dark border-zerox-gray">
               <SelectItem value="javascript">JavaScript</SelectItem>
               <SelectItem value="python">Python</SelectItem>
               <SelectItem value="java">Java</SelectItem>
@@ -167,12 +238,33 @@ const CodeEditor = ({
         </div>
       </div>
       
-      <div className="p-0 bg-zerox-darker">
+      <div className="p-0 bg-zerox-darker relative">
+        {/* Line numbers */}
+        <div className="absolute top-0 left-0 p-4 text-gray-500 font-mono text-xs select-none">
+          {lineNumbers.map((num, i) => (
+            <div key={i} className="h-[1.5rem] text-right pr-2">
+              {num}
+            </div>
+          ))}
+        </div>
+        
+        {/* Hidden syntax highlighted preview */}
+        <pre 
+          ref={previewRef}
+          className="absolute top-0 left-0 right-0 p-4 pl-12 font-mono text-sm pointer-events-none overflow-hidden whitespace-pre"
+          style={{ tabSize: 4 }}
+        ></pre>
+        
+        {/* Actual textarea for editing */}
         <textarea
+          ref={textareaRef}
           id="code-editor"
           value={code}
           onChange={handleCodeChange}
-          className="w-full bg-zerox-darker text-gray-200 font-mono p-4 outline-none resize-none min-h-[300px] overflow-hidden"
+          onKeyDown={handleKeyDown}
+          onScroll={handleScroll}
+          className="w-full bg-transparent text-transparent caret-white font-mono p-4 pl-12 outline-none resize-none min-h-[300px] overflow-auto"
+          style={{ tabSize: 4, lineHeight: '1.5rem' }}
           spellCheck="false"
           placeholder="Write your code here..."
         />

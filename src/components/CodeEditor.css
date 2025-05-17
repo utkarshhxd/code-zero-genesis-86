@@ -1,0 +1,66 @@
+
+/* Custom editor theme */
+.editor-container {
+  position: relative;
+}
+
+.line-numbers {
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 40px;
+  text-align: right;
+  padding: 8px 0;
+  background-color: rgba(0, 0, 0, 0.2);
+  color: #666;
+  font-family: monospace;
+  user-select: none;
+}
+
+.editor-textarea {
+  width: 100%;
+  min-height: 300px;
+  padding: 8px 8px 8px 48px;
+  font-family: monospace;
+  resize: none;
+  background-color: #1e1e1e;
+  color: #d4d4d4;
+  tab-size: 4;
+  outline: none;
+  border: none;
+  line-height: 1.5;
+}
+
+/* Syntax highlighting classes */
+.hljs-keyword {
+  color: #569cd6; /* blue */
+}
+
+.hljs-function {
+  color: #dcdcaa; /* yellow */
+}
+
+.hljs-class {
+  color: #4ec9b0; /* teal */
+}
+
+.hljs-number {
+  color: #b5cea8; /* light green */
+}
+
+.hljs-string {
+  color: #ce9178; /* orange/brown */
+}
+
+.hljs-comment {
+  color: #6a9955; /* green */
+}
+
+.hljs-variable {
+  color: #9cdcfe; /* light blue */
+}
+
+.hljs-operator {
+  color: #d4d4d4; /* white */
+}
