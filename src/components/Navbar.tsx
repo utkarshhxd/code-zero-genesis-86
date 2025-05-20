@@ -40,17 +40,21 @@ const Navbar = () => {
               >
                 Learn
               </Link>
-              <Button 
-                variant="outline" 
-                className="border-zerox-gray/30 text-gray-300 hover:bg-zerox-gray/20 hover:text-white"
-              >
-                Sign In
-              </Button>
-              <Button 
-                className="bg-zerox-blue hover:bg-zerox-blue/90 text-white"
-              >
-                Sign Up
-              </Button>
+              <Link to="/signin">
+                <Button 
+                  variant="outline" 
+                  className="border-zerox-gray/30 text-gray-300 hover:bg-zerox-gray/20 hover:text-white"
+                >
+                  Sign In
+                </Button>
+              </Link>
+              <Link to="/signup">
+                <Button 
+                  className="bg-zerox-blue hover:bg-zerox-blue/90 text-white"
+                >
+                  Sign Up
+                </Button>
+              </Link>
             </div>
           </div>
           
@@ -84,14 +88,18 @@ const Navbar = () => {
               Learn
             </Link>
             <div className="pt-4 flex flex-col space-y-2">
-              <Button variant="outline" className="w-full border-zerox-gray/30 text-gray-300">
-                Sign In
-              </Button>
-              <Button 
-                className="w-full bg-zerox-blue hover:bg-zerox-blue/90 text-white"
-              >
-                Sign Up
-              </Button>
+              <Link to="/signin" className="w-full">
+                <Button variant="outline" className="w-full border-zerox-gray/30 text-gray-300">
+                  Sign In
+                </Button>
+              </Link>
+              <Link to="/signup" className="w-full">
+                <Button 
+                  className="w-full bg-zerox-blue hover:bg-zerox-blue/90 text-white"
+                >
+                  Sign Up
+                </Button>
+              </Link>
             </div>
           </div>
         </div>

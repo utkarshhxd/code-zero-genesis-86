@@ -9,6 +9,8 @@ import Background from "./components/Background";
 import Index from "./pages/Index";
 import NotFound from "./pages/NotFound";
 import Problems from "./pages/Problems";
+import SignIn from "./pages/SignIn";
+import SignUp from "./pages/SignUp";
 
 const queryClient = new QueryClient();
 
@@ -22,6 +24,8 @@ const App = () => (
         <Routes>
           <Route path="/" element={<Index />} />
           <Route path="/problems" element={<Problems />} />
+          <Route path="/signin" element={<SignIn />} />
+          <Route path="/signup" element={<SignUp />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </BrowserRouter>
