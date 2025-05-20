@@ -26,17 +26,15 @@ const Hero = () => {
         </p>
         
         <div className="mt-10 flex flex-col sm:flex-row gap-4 justify-center">
-          <Button 
-            asChild 
-            className="text-white px-8 py-6 text-lg border-0 hover:shadow-lg hover:shadow-zerox-blue/20 transition-all cursor-pointer" 
+          <Link 
+            to="/problems" 
+            className="inline-flex items-center justify-center text-white px-8 py-6 text-lg border-0 hover:shadow-lg hover:shadow-zerox-blue/20 transition-all cursor-pointer rounded-md"
             style={{
               background: "linear-gradient(90deg, #00b4d8 0%, #0077b6 100%)",
             }}
           >
-            <Link to="/problems">
-              Start Coding <ArrowRight className="ml-2 h-5 w-5" />
-            </Link>
-          </Button>
+            Start Coding <ArrowRight className="ml-2 h-5 w-5" />
+          </Link>
         </div>
         
         <div className="mt-16 relative">
