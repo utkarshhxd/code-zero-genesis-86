@@ -37,9 +37,6 @@ const Hero = () => {
               Start Coding <ArrowRight className="ml-2 h-5 w-5" />
             </Link>
           </Button>
-          <Button variant="outline" className="px-8 py-6 text-lg border-zerox-gray/30 hover:bg-zerox-gray/20">
-            Learn More
-          </Button>
         </div>
         
         <div className="mt-16 relative">

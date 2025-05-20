@@ -1,5 +1,5 @@
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import Navbar from '@/components/Navbar';
 import ProblemViewer from '@/components/ProblemViewer';
 import CodeEditor from '@/components/CodeEditor';
@@ -10,7 +10,7 @@ import CodeGrader from '@/components/CodeGrader';
 import { Button } from '@/components/ui/button';
 import { ArrowLeft, Book, Code } from 'lucide-react';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import { ResizablePanelGroup, ResizablePanel, ResizableHandle } from '@/components/ui/resizable';
 
 const defaultProblem: Problem = {
@@ -105,6 +105,15 @@ const Problems = () => {
   const [currentCode, setCurrentCode] = useState(initialCodeTemplates.javascript);
   const [showGeneratePanel, setShowGeneratePanel] = useState(false);
   const [testCases, setTestCases] = useState(defaultTestCases);
+  const location = useLocation();
+  
+  // Check for URL parameters on component mount
+  useEffect(() => {
+    const searchParams = new URLSearchParams(location.search);
+    if (searchParams.get('generate') === 'true') {
+      setView('generate');
+    }
+  }, [location]);
   
   const handleProblemGenerated = (problem: Problem) => {
     setCurrentProblem(problem);

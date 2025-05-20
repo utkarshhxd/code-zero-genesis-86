@@ -35,7 +35,7 @@ const Navbar = () => {
                 Problems
               </Link>
               <Link 
-                to="/learn" 
+                to="/problems?generate=true" 
                 className="text-gray-300 hover:text-white px-3 py-2 rounded-md text-sm"
               >
                 Learn
@@ -80,7 +80,7 @@ const Navbar = () => {
             <Link to="/problems" className="text-white bg-zerox-gray/20 block px-3 py-2 rounded-md text-base font-medium">
               Problems
             </Link>
-            <Link to="/learn" className="text-gray-300 hover:text-white block px-3 py-2 rounded-md text-base">
+            <Link to="/problems?generate=true" className="text-gray-300 hover:text-white block px-3 py-2 rounded-md text-base">
               Learn
             </Link>
             <div className="pt-4 flex flex-col space-y-2">
