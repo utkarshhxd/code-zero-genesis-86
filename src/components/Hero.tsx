@@ -28,7 +28,7 @@ const Hero = () => {
         <div className="mt-10 flex flex-col sm:flex-row gap-4 justify-center">
           <Button 
             asChild 
-            className="text-white px-8 py-6 text-lg border-0 hover:shadow-lg hover:shadow-zerox-blue/20 transition-all" 
+            className="text-white px-8 py-6 text-lg border-0 hover:shadow-lg hover:shadow-zerox-blue/20 transition-all cursor-pointer" 
             style={{
               background: "linear-gradient(90deg, #00b4d8 0%, #0077b6 100%)",
             }}
